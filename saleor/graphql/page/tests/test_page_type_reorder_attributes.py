@@ -55,12 +55,8 @@ def test_reorder_page_type_attributes_by_staff(
         "pageTypeId": graphene.Node.to_global_id("PageType", page_type.pk),
         "moves": [
             {
-                "id": graphene.Node.to_global_id("Attribute", attributes[0].pk),
-                "sortOrder": 2,
-            },
-            {
                 "id": graphene.Node.to_global_id("Attribute", attributes[2].pk),
-                "sortOrder": -1,
+                "sortOrder": -2,
             },
         ],
     }
@@ -81,8 +77,8 @@ def test_reorder_page_type_attributes_by_staff(
 
     expected_order = [
         sorted_attributes[2].pk,
-        sorted_attributes[1].pk,
         sorted_attributes[0].pk,
+        sorted_attributes[1].pk,
     ]
 
     for attr, expected_pk in zip(page_type_data["attributes"], expected_order):
